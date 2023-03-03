@@ -5,10 +5,11 @@ from binance.client import Client
 import time
 import asyncio
 import logging
+from flask import Flask
+
+app = Flask(__name__)
 
 port = int(os.environ.get('PORT', 5000))
-
-app.run(host='0.0.0.0', port=port)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -27,6 +28,14 @@ channel_id = '@tradingdongcopy'
 
 # Liste des traders à suivre
 traders_to_follow = ["TReeOfAlpha1", "Blockchain_C", "香蕉奶菜"]
+
+@app.route('/')
+def index():
+    return 'Hello, World!'
+
+@app.route('/bot')
+def bot():
+    return 'This is the Binance Telegram bot.'
 
 async def main():
     # Envoyer un message de démarrage
