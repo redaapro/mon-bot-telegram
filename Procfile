@@ -1,1 +1,1 @@
-web: python ya.py
+web: python ya.py $PORT
