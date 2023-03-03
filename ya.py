@@ -5,7 +5,7 @@ from binance.client import Client
 import time
 import asyncio
 import logging
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -37,7 +37,29 @@ def index():
 def bot():
     return 'This is the Binance Telegram bot.'
 
+from flask_telegram_bot import TelegramBot
+
+# Initialisation de l'instance Flask
+app = Flask(__name__)
+# Initialisation de l'instance TelegramBot
+bot = TelegramBot(app)
+# Initialisation du webhook
+bot.init_webhook()
+
+# Définir la fonction de gestionnaire de webhook
+@app.route('/' + bot.token, methods=['POST'])
+def webhook():
+    # Récupérer la mise à jour Telegram
+    update = telegram.Update.de_json(request.get_json(force=True), bot)
+
+    # Appeler la fonction de gestionnaire de mise à jour de Telegram
+    bot.process_update(update)
+
+    return 'ok'
+
 async def main():
+     # Démarrer le serveur Flask
+    app.run(host='0.0.0.0', port=port)
     # Envoyer un message de démarrage
     await bot.send_message(chat_id=channel_id, text="Bonjour, bienvenue dans le canal qui tenvoie en temps réels les trades des traders sélectionnés sur Binance. Copier/coller dans votre plateforme de trading !")
 
