@@ -8,7 +8,11 @@ import logging
 from flask import Flask, request
 
 app = Flask(__name__)
+# Define your Flask routes and application logic here
 
+if __name__ == '__main__':
+    app.run()
+    
 port = int(os.environ.get('PORT', 5000))
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
