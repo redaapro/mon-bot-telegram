@@ -1,1 +1,1 @@
-web: python bo.py
+web: python ya.py
