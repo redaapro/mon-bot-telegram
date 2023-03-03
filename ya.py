@@ -59,7 +59,7 @@ def webhook():
 
 async def main():
      # Démarrer le serveur Flask
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
     # Envoyer un message de démarrage
     await bot.send_message(chat_id=channel_id, text="Bonjour, bienvenue dans le canal qui tenvoie en temps réels les trades des traders sélectionnés sur Binance. Copier/coller dans votre plateforme de trading !")
 
