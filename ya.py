@@ -6,6 +6,7 @@ import time
 import asyncio
 import logging
 from flask import Flask, request
+from flask_telegram_bot import TelegramBot
 
 app = Flask(__name__)
 # Define your Flask routes and application logic here
@@ -41,12 +42,6 @@ def index():
 def bot():
     return 'This is the Binance Telegram bot.'
 
-from flask_telegram_bot import TelegramBot
-
-# Initialisation de l'instance Flask
-app = Flask(__name__)
-# Initialisation de l'instance TelegramBot
-bot = TelegramBot(app)
 # Initialisation du webhook
 bot.init_webhook()
 
